@@ -5,25 +5,37 @@ import glob
 
 TARGET_DIR = "<insert your root dir here>"
 
-def main():
+def get_target_dir():
     if TARGET_DIR == "<insert your root dir here>":
-        print('Please insert a targer dir.')
-        return
+        print('TARGET DIRECTORY:')
+        target_dir = input()
+    return target_dir
 
+def get_files(target_dir):
+    # Get all files
     if os == 'nt':
-        files = glob.glob(TARGET_DIR + '\\**\\*.md', recursive=True)
+        files = glob.glob(target_dir + '\\**\\*.md', recursive=True)
     else:
-        files = glob.glob(TARGET_DIR + '/**/*.md', recursive=True)
+        files = glob.glob(target_dir + '/**/*.md', recursive=True)
+    return files
 
+def get_outfile(target_dir):
     if os == 'nt':
-        outFile = open(TARGET_DIR + '\\' + 'AllInOne.md', 'w+')
+        outFile = open(target_dir + '\\' + 'AllInOne.md', 'w+')
     else:
-        outFile = open(TARGET_DIR + '/' + 'AllInOne.md', 'w+')
+        outFile = open(target_dir + '/' + 'AllInOne.md', 'w+')
+    return outFile
+
+def main():
+    print('TARGET_DIR = ' + str(TARGET_DIR))
+    target_dir = get_target_dir()
+    files = get_files(target_dir)
+    outfile = get_outfile(target_dir)
 
     for file in files:
         inFile = open(file)
-        outFile.write(str(inFile.read()))
-        outFile.write('\n' + '----' + '\n')
+        outfile.write(str(inFile.read()))
+        outfile.write('\n' + '----' + '\n')
 
 if __name__ == "__main__":
     main()

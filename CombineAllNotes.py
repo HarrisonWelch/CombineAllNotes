@@ -9,6 +9,8 @@ def get_target_dir():
     if TARGET_DIR == "<insert your root dir here>":
         print('TARGET DIRECTORY:')
         target_dir = input()
+    else:
+        target_dir = TARGET_DIR
     return target_dir
 
 def get_files(target_dir):
